@@ -69,6 +69,6 @@ jobs:
 
             # Publish to NPM
             - name: Publish to NPM
-            - uses: JS-DevTools/npm-publish@v3
+              uses: JS-DevTools/npm-publish@v3
               with:
                 token: ${{ secrets.NPM_TOKEN }}
