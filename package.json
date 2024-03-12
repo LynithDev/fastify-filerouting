@@ -3,6 +3,11 @@
     "version": "1.0.0",
     "description": "File routing plugin for Fastify",
     "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LynithDev/fastify-filerouting"
+    },
+    "homepage": "https://github.com/LynithDev/fastify-filerouting",
     "scripts": {
         "build": "tsc",
         "prepare": "npm run build",
