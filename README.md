@@ -11,6 +11,15 @@ src/
         └── route.ts    (GET | POST | PUT | DELETE)
 ```
 
+## 📖 Table of Contents
+1. [🚀 Install](./README.md#🚀-install)
+2. [📗 Usage](./README.md#📗-usage)
+    1. [Register Plugin](./README.md#register-plugin)
+    2. [Create Single Route](./README.md#create-single-route)
+    3. [Create Multiple Routes](./README.md#create-multiple-routes-in-the-same-file)
+    4. [Type Provider](./README.md#overriding-the-type-provider)
+3. [📄 License](./README.md#📄-license)
+
 ## 🚀 Install
 ```sh
 npm install --save @lynithdev/fastify-filerouting
