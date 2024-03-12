@@ -10,7 +10,8 @@ import type {
     RouteGenericInterface, 
     RouteOptions,
     FastifySchema,
-    FastifyTypeProviderDefault
+    FastifyTypeProviderDefault,
+    FastifyTypeProvider
 } from 'fastify';
 import fastifyPlugin from 'fastify-plugin';
 import path from 'path';
@@ -18,41 +19,43 @@ import fs from "fs/promises";
 import createError from '@fastify/error';
 import glob from 'glob-promise';
 
-export type CustomTypeProvider = FastifyTypeProviderDefault;
-
-export type TypedRequest<TSchema extends FastifySchema> = FastifyRequest<
+export type TypedRequest<TSchema extends FastifySchema, TProvider extends FastifyTypeProvider = FastifyTypeProviderDefault> = FastifyRequest<
     RouteGenericInterface,
     RawServerDefault,
     RawRequestDefaultExpression<RawServerDefault>,
     TSchema,
-    CustomTypeProvider
+    TProvider
 >;
 
-export type TypedResponse<TSchema extends FastifySchema> = FastifyReply<
+export type TypedResponse<TSchema extends FastifySchema, TProvider extends FastifyTypeProvider = FastifyTypeProviderDefault> = FastifyReply<
     RawServerDefault,
     RawRequestDefaultExpression,
     RawReplyDefaultExpression,
     RouteGenericInterface,
     ContextConfigDefault,
     TSchema,
-    CustomTypeProvider
+    TProvider
 >;
 
 export type Method = "all" | "get" | "head" | "post" | "put" | "delete" | "connect" | "options" | "trace" | "patch";
 
-export type Route<T extends FastifySchema = never> = {
+export type Route<T extends FastifySchema = never, TProvider extends FastifyTypeProvider = FastifyTypeProviderDefault> = {
     schema?: T,
     method?: Method,
     url?: string,
-    handler?: (req: TypedRequest<T>, res: TypedResponse<T>) => void
+    handler?: (req: TypedRequest<T, TProvider>, res: TypedResponse<T, TProvider>) => void
 } & Omit<RouteOptions, "url" | "handler" | "method">;
 
 export type Routes = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [K in Method]?: Route<any>
+    [K in Method]?: Route<any, any>
 };
 
-export const createRoute = <T extends FastifySchema>(opts: Route<T>): Route<T> => opts;
+export const createRoute = <
+    TSchema extends FastifySchema, 
+    TProvider extends FastifyTypeProvider = FastifyTypeProviderDefault
+>(opts: Route<TSchema, TProvider>): Route<TSchema, TProvider> => opts;
+
 export const createRoutes = (routes: Routes): Route[] => {
     return Object.entries(routes).map(([method, route]) => {
         if (typeof route.method === "undefined") {
