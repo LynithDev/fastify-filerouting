@@ -1,5 +1,5 @@
 {
-    "name": "fastify-filerouting",
+    "name": "@lynithdev/fastify-filerouting",
     "version": "1.0.0",
     "description": "File routing plugin for Fastify",
     "main": "dist/index.js",
