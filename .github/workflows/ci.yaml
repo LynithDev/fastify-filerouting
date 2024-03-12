@@ -22,7 +22,7 @@ jobs:
                   node-version: 18
 
             # Install Dependencies
-            - run: npm ci
+            - run: npm i
 
             # Build Package
             - run: npm run build
@@ -49,7 +49,7 @@ jobs:
               run: cat ./package.json
 
             # Install Dependencies
-            - run: npm ci
+            - run: npm i
 
             # Build package
             - run: npm run build
