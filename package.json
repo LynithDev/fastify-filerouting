@@ -5,6 +5,7 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc",
+        "prepare": "node run build",
         "test": "jest"
     },
     "dependencies": {
