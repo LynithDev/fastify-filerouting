@@ -78,5 +78,19 @@ export default createRoutes({
 });
 ```
 
+### Overriding the type provider
+I've only managed to find one way of overriding the type provider (for the route schema). (If anyone knows a better way, please create an issue)
+
+(Example using [fastify-type-provider-typebox](https://github.com/fastify/fastify-type-provider-typebox))
+```ts
+import { FastifySchema } from 'fastify';
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import { type Route, createRoute as _createRoute } from '@lynithdev/fastify-filerouting';
+
+export const createRoute = <Schema extends FastifySchema>(opts: Route<Schema, TypeBoxTypeProvider>) => _createRoute<Schema, TypeBoxTypeProvider>(opts);
+```
+
+After you've done that, use your new exported function instead of the library's exported function.
+
 # 📄 License
 This project is licensed under [MIT](./LICENSE)
